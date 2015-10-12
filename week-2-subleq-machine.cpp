@@ -32,49 +32,51 @@ int main(int argv, char ** argc)
 
     printf("Got string\n");
 
+
     reg1 = string[0];                 //initial set registers
     reg2 = string[1];
     reg3 = string[2];
 
     printf("Set Registers\n");
-    printf("Registers are\n: %c\n %c\n %c\n", reg1,reg2,reg3);
+    printf("Registers are\n: %hhd\n %hhd\n %hhd\n", reg1,reg2,reg3);
 
     int i = 2;
     while (reg1 != NULL || reg2 != NULL|| reg3 != NULL)  
     {
-        printf("Registers are:\n %c\n %c\n %c\n", reg1,reg2,reg3);
+        printf("Registers are:\n %hhd\n %hhd\n %hhd\n", reg1,reg2,reg3);
 
         i--;
 
-        if (((reg1-'0') - (reg2-'0')) <= 0) //If less than or equal to 0
+        if ((reg1 - reg2) <= 0) //If less than or equal to 0
         {
             printf("Encountered less than or equal\n");
-            printf("%c - %c = %d\n", reg1,reg2,(reg1-'0') - (reg2-'0'));
+            printf("%hhd - %hhd = %d\n", reg1,reg2,(reg1-'0') - (reg2-'0'));
 
-            if ((reg2 - '0') == -2)         
+            if (reg3 == -1)         
+            {   printf("Encountered -1: Exit condition\n");
+                break; //set memory address
+            }
+
+            else if (reg2 == -2)         
             {   reg2 = ((reg1 - '0') - (reg2 - '0')); //set memory address
             }
 
-            if ((reg3 - '0') == -2)
+            else if (reg3 == -2)
             {   reg1 = string[reg3+1];        //Set registers to new values
                 reg2 = string[reg1+1];
                 reg3  = string[reg2+1];
                 continue;
             }
 
-            printf("Jumping to %c\n", reg3);
-            reg1  = string[(reg3-'0')];        //Set registers to new values
-            reg2  = string[(reg3-'0')+1];
-            reg3  = string[(reg1-'0')+3];
+            printf("Jumping to %hhd\n", reg3);
+            reg1  = string[reg3];        //Set registers to new values
+            reg2  = string[reg3+1];
+            reg3  = string[reg1+3];
 
-            printf("Registers are:\n %c\n %c\n %c\n", reg1,reg2,reg3);
+            printf("Registers are:\n %hhd\n %hhd\n %hhd\n", reg1,reg2,reg3);
 
 
             continue;                   //gogo
-        }
-        else if (((reg1 - '0') - (reg2 - '0')) <= 0 && (reg3 - '0') == -1)  //If result is less than or equal to 0 and jump address is -1 end program.
-        {
-            break;
         }
         else //Else, just move forward one
         {   reg1 = string[reg3+1];        //Set registers to new values
