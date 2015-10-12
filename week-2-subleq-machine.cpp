@@ -24,13 +24,11 @@ int main(int argv, char ** argc)
     std::ifstream in("subleq.bin"); //Read in file into input buffer
     std::string contents((std::istreambuf_iterator<char>(in)),std::istreambuf_iterator<char>()); //Create new string and read in full file into that string
 
-    printf("Read in file\n");
+//    printf("Read in file\n");
 
 
     char * string = new char [contents.length()+1];
     std::strcpy(string,contents.c_str()); //Get the C string because its easier to iterate over than C++ string objects.
-
-    printf("Got string\n");
 
 
     reg1 = string[0];                 //initial set registers
@@ -41,12 +39,12 @@ int main(int argv, char ** argc)
     printf("Registers are\n: %hhd\n %hhd\n %hhd\n", reg1,reg2,reg3);
 
     int i = 2;
-    while (reg1 != NULL || reg2 != NULL|| reg3 != NULL)  
+   // while (reg1 != NULL || reg2 != NULL|| reg3 != NULL)  
+    while(i>0) 
     {
         printf("Registers are:\n %hhd\n %hhd\n %hhd\n", reg1,reg2,reg3);
 
         i--;
-
         if ((reg1 - reg2) <= 0) //If less than or equal to 0
         {
             printf("Encountered less than or equal\n");
@@ -57,9 +55,7 @@ int main(int argv, char ** argc)
                 break; //set memory address
             }
 
-            else if (reg2 == -2)         
-            {   reg2 = ((reg1 - '0') - (reg2 - '0')); //set memory address
-            }
+            
 
             else if (reg3 == -2)
             {   reg1 = string[reg3+1];        //Set registers to new values
@@ -77,6 +73,13 @@ int main(int argv, char ** argc)
 
 
             continue;                   //gogo
+        }
+        else if (reg2 == -2)         
+        {   //If register 2 = -2 then print the result of (reg1 - -2) and continue
+            printf("%c",(reg1 -  reg2));
+            reg1 = string[reg3+1];        //Set registers to new values
+            reg2 = string[reg3+2];
+            reg3 = string[reg1+2];
         }
         else //Else, just move forward one
         {   reg1 = string[reg3+1];        //Set registers to new values
