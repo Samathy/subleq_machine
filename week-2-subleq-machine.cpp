@@ -82,14 +82,15 @@ int main(int argv, char ** argc)
         else if (reg2 == -1)         
         {   //If register 2 = -1 then print the result of (reg1 - -2) and continue
             printf("%c",(reg1 -  reg2));
-            reg1 = string[tick+1];        //Set registers to new values
-            reg2 = string[tick+2];
-            reg3 = string[tick+3];
+            reg1 = string[tick+3];        //Set registers to new values
+            reg2 = string[tick+4];
+            reg3 = string[tick+5];
+            printf("Registers are\n: %hhd\n %hhd\n %hhd\n\n\n", reg1,reg2,reg3);
         }
         else //Else, just move forward one
-        {   reg1 = string[tick+1];        //Set registers to new values
-            reg2 = string[tick+2];
-            reg3 = string[tick+3];
+        {   reg1 = string[tick+3];        //Set registers to new values
+            reg2 = string[tick+4];
+            reg3 = string[tick+5];
         }
 
         tick++;
