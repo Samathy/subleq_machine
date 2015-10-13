@@ -22,18 +22,20 @@ int main(int argv, char ** argc)
     char reg2 = 0;
     char reg3 = 0;
 
-//    std::ifstream in("subleq.bin"); //Read in file into input buffer
-//    std::string contents((std::istreambuf_iterator<char>(in)),std::istreambuf_iterator<char>()); //Create new string and read in full file into that string
-//
-//   printf("Read in file\n");
-//
-//    printf("Length of program: %d\n",contents.length());
-//    char * string = new char [contents.length()+1];
-//    std::strncpy(string,contents.c_str(), contents.length()+1); //Get the C string because its easier to iterate over than C++ string objects.
+    std::ifstream in("subleq.bin"); //Read in file into input buffer
+    std::string contents((std::istreambuf_iterator<char>(in)),std::istreambuf_iterator<char>()); //Create new string and read in full file into that string
+
+    printf("Read in file\n");
+
+    printf("Length of program: %d\n",contents.length());
+    char * string = new char [contents.length()];
+    //std::strncpy(string,contents.c_str(),contents.length()); //Get the C string because its easier to iterate over than C++ string objects.
+    // 
+    std::memcpy(string, contents.c_str(), contents.length());
+    printf("%d string size\n", sizeof(string));
 
 
-    char string[12] = {1,2,3,1,2,-2,64,-1,9,1,2,-1};
-
+    //char string[12] = {1,2,3,1,2,-2,64,-1,9,1,2,-1};
     //char string [36] {71, -1, 3, 68, -1, 0, 75, -1, 0, 75, -1, 0, 78, -1, 0, 31, -1, 0, 86, -1, 0, 78, -1, 0, 81, -1, 0, 75, -1, 0, 67, -1, 0, 1, 2, -1} ;
 
     reg1 = string[0];                 //initial set registers
@@ -76,7 +78,6 @@ int main(int argv, char ** argc)
         reg1 = string[tick];        //Set registers to new values
         reg2 = string[tick+1];
         reg3 = string[tick+2];
-
 
 
      }
