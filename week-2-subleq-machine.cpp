@@ -32,7 +32,7 @@ int main(int argv, char ** argc)
 //    std::strncpy(string,contents.c_str(), contents.length()+1); //Get the C string because its easier to iterate over than C++ string objects.
 
 
-    char string[9] = {64,-1,3,1,2,6,1,2,-1};
+    char string[12] = {1,2,3,1,2,-2,64,-1,9,1,2,-1};
 
     //char string [36] {71, -1, 3, 68, -1, 0, 75, -1, 0, 75, -1, 0, 78, -1, 0, 31, -1, 0, 86, -1, 0, 78, -1, 0, 81, -1, 0, 75, -1, 0, 67, -1, 0, 1, 2, -1} ;
 
@@ -41,20 +41,13 @@ int main(int argv, char ** argc)
     reg3 = string[2];
 
     printf("Subleq SISC\n");
-    printf("Initial registers: [1]%hhd [2]%hhd [3]%hhd Program loaded is: ", reg1,reg2,reg3);
+    printf("Initial registers: [1]%hhd [2]%hhd [3]%hhd \n\n", reg1,reg2,reg3);
 
-//    for (int j = 0; j < contents.length(); j++)
-//    {
-//        printf("%hhi ", string[j]);
-//    }
-    printf("\n\n");
 
-    int i = 5;
     int tick = 0;
     while (reg1 != 0 || reg2 != 0 || reg3 != 0)  
     {
 
-        i--;
         if ((reg1 - reg2) <= 0) //If less than or equal to 0
         {
 
@@ -71,20 +64,20 @@ int main(int argv, char ** argc)
             {   tick = reg3; }
 
 
+
         }
-        else if (reg2 == -1)         
+        else if ((reg1 - reg2) > 0 && reg2 == -1)         
         {   //If register 2 = -1 then print the result of (reg1 - -2) and continue
-            printf("%c",(reg1 -  reg2));
+            printf("%hhc",(reg1 -  reg2));
             tick = tick+3;
         }
+
 
         reg1 = string[tick];        //Set registers to new values
         reg2 = string[tick+1];
         reg3 = string[tick+2];
 
 
-
-        tick = tick+3;
 
      }
 
