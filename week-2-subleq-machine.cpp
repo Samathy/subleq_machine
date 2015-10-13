@@ -29,9 +29,7 @@ int main(int argv, char ** argc)
 
     printf("Length of program: %d\n",contents.length());
     char * string = new char [contents.length()];
-    //std::strncpy(string,contents.c_str(),contents.length()); //Get the C string because its easier to iterate over than C++ string objects.
-    // 
-    std::memcpy(string, contents.c_str(), contents.length());
+    std::memcpy(string, contents.c_str(), contents.length());       //Use memcpy() here because using strncpy() doesnt work due to input containing NULL bytes.
     printf("%d string size\n", sizeof(string));
 
 
@@ -73,7 +71,6 @@ int main(int argv, char ** argc)
             printf("%hhc",(reg1 -  reg2));
             tick = tick+3;
         }
-
 
         reg1 = string[tick];        //Set registers to new values
         reg2 = string[tick+1];
