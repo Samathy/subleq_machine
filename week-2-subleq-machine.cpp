@@ -32,9 +32,9 @@ int main(int argv, char ** argc)
 //    std::strncpy(string,contents.c_str(), contents.length()+1); //Get the C string because its easier to iterate over than C++ string objects.
 
 
-    //char string[9] = {64,-1,3,64,-1,3,1,2,-1};
+    char string[9] = {64,-1,3,1,2,6,1,2,-1};
 
-    char string [36] {71, -1, 3, 68, -1, 0, 75, -1, 0, 75, -1, 0, 78, -1, 0, 31, -1, 0, 86, -1, 0, 78, -1, 0, 81, -1, 0, 75, -1, 0, 67, -1, 0, 1, 2, -1} ;
+    //char string [36] {71, -1, 3, 68, -1, 0, 75, -1, 0, 75, -1, 0, 78, -1, 0, 31, -1, 0, 86, -1, 0, 78, -1, 0, 81, -1, 0, 75, -1, 0, 67, -1, 0, 1, 2, -1} ;
 
     reg1 = string[0];                 //initial set registers
     reg2 = string[1];
@@ -58,51 +58,31 @@ int main(int argv, char ** argc)
         if ((reg1 - reg2) <= 0) //If less than or equal to 0
         {
 
-            if (reg3 == -1)         
+            if (reg3 == -1)     //If reg3 is -1 then exit
             {   printf("\n -1 Exit\n");
-                break; //set memory address
+                break; 
             }
 
-            
 
-            else if (reg3 == -2)
-            {   
-                tick = reg3;
-                reg1 = string[reg3+1];        //Set registers to new values
-                reg2 = string[reg1+1];
-                reg3  = string[reg2+1];
-            }
+            if (reg3 == -2) //IF reg3 == -2 then just move forward one set
+            {   tick = tick+3; }
 
-            if (reg3 == -2) //IF reg3 == -2 then just move forward one.
-            {
-                tick = reg3;
-                reg1  = string[tick];        //Set registers to new values
-                reg2  = string[tick+1];
-                reg3  = string[tick+2];
-            }
             else                            //else jump to reg3 location
-            {
-                tick = reg3;
-                reg1  = string[reg3];        //Set registers to new values
-                reg2  = string[reg3+1];
-                reg3  = string[reg1+3];
-            }
+            {   tick = reg3; }
 
 
         }
         else if (reg2 == -1)         
         {   //If register 2 = -1 then print the result of (reg1 - -2) and continue
             printf("%c",(reg1 -  reg2));
-            reg1 = string[tick];        //Set registers to new values
-            reg2 = string[tick+1];
-            reg3 = string[tick+2];
+            tick = tick+3;
         }
-        else //Else, just move forward one
-        {   
-            reg1 = string[tick];        //Set registers to new values
-            reg2 = string[tick+1];
-            reg3 = string[tick+2];
-        }
+
+        reg1 = string[tick];        //Set registers to new values
+        reg2 = string[tick+1];
+        reg3 = string[tick+2];
+
+
 
         tick = tick+3;
 
